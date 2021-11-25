@@ -4,6 +4,7 @@ import datetime
 
 
 class Request(models.Model):
+    update_id = models.IntegerField(null=True)
     request = models.TextField()
     date = models.DateTimeField(default=timezone.now)
     sender = models.CharField(max_length=64)
