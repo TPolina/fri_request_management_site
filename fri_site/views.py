@@ -2,12 +2,16 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from .models import Request
-import json
 from datetime import datetime
+import json
 
 
 def index(request):
-    return HttpResponse("Hello, world. This is the bot app.")
+    requests = Request.objects.all()
+    res = "Requests: \n"
+    for r in requests:
+        res += f"{r.request} from {r.sender}\n"
+    return HttpResponse(res)
 
 
 @csrf_exempt
@@ -24,9 +28,9 @@ def show_request_on_page(request):
 
     def _add_message_to_db(json_dict: dict) -> (None, True):
         try:
-            sender_id     = json_dict['message']['from'].get('id')
-            message_text  = json_dict['message'].get('text')
-            message_date  = json_dict['message'].get('date')
+            sender_id = json_dict['message']['from'].get('id')
+            message_text = json_dict['message'].get('text')
+            message_date = json_dict['message'].get('date')
             update_id = json_dict.get('update_id')
         except KeyError:
             return None
