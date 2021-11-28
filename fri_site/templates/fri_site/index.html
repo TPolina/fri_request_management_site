@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FRI Kyiv Requests</title>
+
+    <style>
+        .request {
+            max-width: 300px;
+            background-color: powderblue;
+            padding: 10px;
+            margin: 15px;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgb(221, 237, 236);">
+    <h1 style="color: rgb(73, 75, 77); font-size: 70px; text-align: center;">Requests</h1>
+
+    {% for request in requests %}
+        <div class="request">
+            <p style="color: rgb(57, 58, 59); font-size: 20px;">{{ request.request }}</p>
+            <p style="color: rgb(73, 75, 77); font-size: 15px;">{{ request.date }}</p>
+        </div>
+    {% endfor %}
+</body>
+</html>

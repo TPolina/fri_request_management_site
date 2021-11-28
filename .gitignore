@@ -60,6 +60,7 @@ coverage.xml
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+staticfiles
 
 # Flask stuff:
 instance/
@@ -83,6 +84,7 @@ ipython_config.py
 
 # pyenv
 .python-version
+.idea
 ms_env
 
 # pipenv

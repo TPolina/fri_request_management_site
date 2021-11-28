@@ -1,21 +1,26 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from .models import Request
 from datetime import datetime
+import telebot
 import json
+import os
 
 
 def index(request):
-    requests = Request.objects.all()
-    res = "Requests: \n"
-    for r in requests:
-        res += f"{r.request} from {r.sender}\n"
-    return HttpResponse(res)
+    requests = Request.objects.order_by('-date')
+    return render(request, 'fri_site/index.html', {'requests': requests})
 
 
 @csrf_exempt
-def show_request_on_page(request):
+def add_request_from_bot(request):
+
+    tg_bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
+    assert tg_bot_token is not None, "TELEGRAM_BOT_TOKEN should be set as env variable"
+
+    bot = telebot.TeleBot(tg_bot_token)
+
     try:
         json_message = json.loads(request.body)
     except json.decoder.JSONDecodeError as err:
@@ -59,6 +64,8 @@ def show_request_on_page(request):
     except ValueError as e:
         return HttpResponseBadRequest(str(e))
     if result is True:
+        response = "Привіт!\nМи отримали твій запит, подумаємо над ним і відпишемо, як тільки зможемо :)"
+        bot.send_message(json_message['message']['chat'].get('id'), response)
         return HttpResponse('OK')
     else:
         return HttpResponseBadRequest('Malformed or incomplete JSON data received')

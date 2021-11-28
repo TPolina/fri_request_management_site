@@ -3,5 +3,5 @@ from . import views
 
 urlpatterns = [
     path('hello/', views.index),
-    path('hook/', views.show_request_on_page),
+    path('hook/', views.add_request_from_bot),
 ]
