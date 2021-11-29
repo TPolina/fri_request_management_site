@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("DJANGO_SECRET")
+SECRET_KEY = os.environ.get("DJANGO_SECRET", None)
 assert SECRET_KEY is not None, "DJANGO_SECRET should be set as env variable"
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -35,7 +35,8 @@ else:
     else:
         DEBUG = False
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+# A list of host names that Django can serve: a security measure to prevent HTTP Host header attacks.
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -117,9 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'uk'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Kiev'
 
 USE_I18N = True
 

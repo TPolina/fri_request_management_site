@@ -5,7 +5,7 @@
     <title>FRI Kyiv Requests</title>
 
     <style>
-        .request {
+        .message {
             max-width: 300px;
             background-color: powderblue;
             padding: 10px;
@@ -15,12 +15,12 @@
 </head>
 
 <body style="background-color: rgb(221, 237, 236);">
-    <h1 style="color: rgb(73, 75, 77); font-size: 70px; text-align: center;">Requests</h1>
+    <h1 style="color: rgb(73, 75, 77); font-size: 70px; text-align: center;">Запити від фрішників</h1>
 
-    {% for request in requests %}
-        <div class="request">
-            <p style="color: rgb(57, 58, 59); font-size: 20px;">{{ request.request }}</p>
-            <p style="color: rgb(73, 75, 77); font-size: 15px;">{{ request.date }}</p>
+    {% for message in messages %}
+        <div class="message">
+            <p style="color: rgb(57, 58, 59); font-size: 20px;">{{ message.message }}</p>
+            <p style="color: rgb(73, 75, 77); font-size: 15px;">{{ message.date }}</p>
         </div>
     {% endfor %}
 </body>
