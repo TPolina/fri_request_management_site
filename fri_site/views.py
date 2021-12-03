@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from .models import User, Message
+from .forms import MessageForm
 from datetime import datetime
 import telebot
 import json
@@ -9,8 +10,11 @@ import os
 
 
 def index(request):
-    messages = Message.objects.order_by('-date')
-    return render(request, 'fri_site/index.html', {'messages': messages})
+    to_do = Message.objects.filter(status__exact='to do').order_by('-date')
+    in_progress = Message.objects.filter(status__exact='in progress').order_by('-date')
+    done = Message.objects.filter(status__exact='done').order_by('-date')
+    context = {"to_do": to_do, "in_progress": in_progress, "done": done}
+    return render(request, 'fri_site/index.html', context)
 
 
 @csrf_exempt
@@ -100,3 +104,17 @@ def add_user_and_message_from_bot(request):
         return HttpResponse('OK')
     else:
         return HttpResponseBadRequest('Malformed or incomplete JSON data received')
+
+
+def edit_message(request, update_id):
+    message = Message.objects.get(update_id=update_id)
+    if request.method != 'POST':
+        form = MessageForm(instance=message)
+    else:
+        form = MessageForm(instance=message, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('fri_site:index')
+
+    context = {'message': message, 'form': form}
+    return render(request, 'fri_site/edit_message.html', context)

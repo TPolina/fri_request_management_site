@@ -12,7 +12,9 @@ class User(models.Model):
     user_name = models.CharField(max_length=64, null=True)
 
     def __str__(self):
-        if self.last_name is not None:
+        if self.user_name is not None:
+            return f'{self.user_name}'
+        elif self.last_name is not None:
             return f'{self.first_name} {self.last_name}'
         else:
             return f'{self.first_name}'
@@ -25,7 +27,7 @@ class Message(models.Model):
     message = models.TextField()
     date = models.DateTimeField(default=timezone.now)
     sender = models.ForeignKey(User, on_delete=models.CASCADE)
-    responsible = models.CharField(max_length=64)
+    responsible = models.CharField(max_length=64, null=True)
     status = StatusField()
 
     def __str__(self):
