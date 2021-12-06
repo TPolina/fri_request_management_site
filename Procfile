@@ -1,0 +1,1 @@
+web: gunicorn fri_management_site.wsgi

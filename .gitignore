@@ -60,6 +60,7 @@ coverage.xml
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+staticfiles
 
 # Flask stuff:
 instance/
@@ -83,6 +84,8 @@ ipython_config.py
 
 # pyenv
 .python-version
+.idea
+ms_env
 
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
@@ -126,4 +129,4 @@ venv.bak/
 dmypy.json
 
 # Pyre type checker
-.pyre/
+.pyre/“staticfiles/”

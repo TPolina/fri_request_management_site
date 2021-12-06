@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Запити до керівництва ФРІ Київ</title>
+  <style>
+    body { background-color: #4a4e69; }
+    h1, h2 {
+      color: #f2e9e4;
+      text-align: center;
+      font-weight: lighter;
+      font-family: sans-serif;
+      padding: 10px;
+    }
+    h1 {
+      font-size: 60px;
+      margin: 20px;
+    }
+    h2 {
+      font-size: 40px;
+      margin: 10px;
+    }
+    hr {
+      width: 50%;
+      margin: 5px auto;
+    }
+    .column {
+      float: left;
+      width: 30%;
+      padding: 10px;
+    }
+    .message {
+      background-color: #ede0d4;
+      color: #4a4e69;
+      border-radius: 10px;
+      margin: 20px;
+      }
+    .message:hover { background-color: #e0cbb4; }
+    p {
+      font-size: 16px;
+      padding: 10px;
+      margin: -10px 10px -10px 10px;
+    }
+    a:link, a:visited {
+      color: #4a4e69;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #22223b;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Запити Від Фрішників</h1>
+  <hr><hr>
+
+  <div class="column">
+    <h2>To do</h2>
+
+    {% for message in to_do %}
+        <div class="message">
+            <p style="font-size: 20px;">{{ message.message }}</p><br>
+            <hr style="width: 80%">
+            <p>Від: {{ message.sender }}</p>
+            <p>Відповідальний: {{ message.responsible }}</p>
+            <p style="text-align: right;">{{ message.date|date:"H:i, j N Y" }}</p>
+            <p style="text-align: right;">
+              <a href="{% url 'fri_site:edit_message' message.update_id %}">Відкрити</a>
+            </p>
+        </div>
+    {% endfor %}
+
+  </div>
+  <div class="column">
+    <h2>In progress</h2>
+
+    {% for message in in_progress %}
+        <div class="message">
+            <p style="font-size: 20px;">{{ message.message }}</p><br>
+            <hr style="width: 80%">
+            <p>Від: {{ message.sender }}</p>
+            <p>Відповідальний: {{ message.responsible }}</p>
+            <p style="text-align: right;">{{ message.date|date:"H:i, j N Y" }}</p>
+            <p style="text-align: right;">
+              <a href="{% url 'fri_site:edit_message' message.update_id %}">Відкрити</a>
+            </p>
+        </div>
+    {% endfor %}
+
+  </div>
+  <div class="column">
+    <h2>Done</h2>
+
+    {% for message in done %}
+        <div class="message">
+            <p style="font-size: 20px;">{{ message.message }}</p><br>
+            <hr style="width: 80%">
+            <p>Від: {{ message.sender }}</p>
+            <p>Відповідальний: {{ message.responsible }}</p>
+            <p style="text-align: right;">{{ message.date|date:"H:i, j N Y" }}</p>
+            <p style="text-align: right;">
+              <a href="{% url 'fri_site:edit_message' message.update_id %}">Відкрити</a>
+            </p>
+        </div>
+    {% endfor %}
+
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Робота із запитом</title>
+  <style>
+    body { background-color: #4a4e69; }
+    .message {
+      background-color: #ede0d4;
+      color: #4a4e69;
+      border-radius: 10px;
+      padding: 20px;
+      position: absolute;
+      width: 30%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    p {
+      font-size: 20px;
+      padding-left: 10px;
+      padding-bottom: 8px;
+    }
+    .form_box {
+      background-color: #ede0d4;
+      color: #4a4e69;
+      border-radius: 10px;
+      border-color: #4a4e69;
+      border-width: 1px;
+      font-size: 15px;
+      padding: 5px;
+    }
+    .form_label {
+      color: #4a4e69;
+      font-size: 20px;
+      padding: 10px;
+    }
+    button {
+      font-size: 15px;
+      padding: 10px;
+      width: 100px;
+      background-color: #4a4e69;
+      color: #f2e9e4;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="message">
+    <p style="font-size: 25px;">{{ message.message }}</p><br>
+    <hr style="width: 80%">
+    <p>Від: {{ message.sender }}</p>
+
+    <form action="{% url 'fri_site:edit_message' message.update_id %}" method='post'>
+      {% csrf_token %}
+      {% for field in form %}
+        <label class="form_label">{{ field.label }}</label>
+        {{ field }}<br><br>
+      {% endfor %}
+      <div style="text-align: right">
+        <button name='submit'>Зберегти</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>
