@@ -8,4 +8,4 @@ The website accepts messages from telegram bot and display them on the page. You
 
 [Telegram bot](t.me/FriRequestBot)
 
-[Website](https://dashboard.heroku.com/apps/frirequestmanagementsite)
+[Website](https://frirequestmanagementsite.herokuapp.com/)
