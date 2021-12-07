@@ -6,6 +6,6 @@ The website accepts messages from telegram bot and display them on the page. You
 
 ## links
 
-Telegram bot: @FriRequestBot
+[Telegram bot](t.me/FriRequestBot)
 
 [Website](https://dashboard.heroku.com/apps/frirequestmanagementsite)
