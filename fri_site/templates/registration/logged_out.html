@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Вихід з аккаунту</title>
+  <style>
+    body { background-color: #4a4e69; }
+    .block {
+      background-color: #ede0d4;
+      color: #4a4e69;
+      border-radius: 10px;
+      padding: 20px;
+      position: absolute;
+      width: 30%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    p {
+      font-size: 25px;
+      font-weight: lighter;
+      font-family: sans-serif;
+      text-align: center;
+    }
+    a:link, a:visited {
+      color: #4a4e69;
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+
+<body>
+  <div class="block">
+    <p>Ви вийшли зі свого аккаунту.</p>
+    <p>Повернутися на <a href="{% url 'fri_site:index' %}">головну сторінку.</a></p>
+  </div>
+</body>
+</html>

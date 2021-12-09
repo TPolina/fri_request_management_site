@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Вхід</title>
+  <style>
+    body { background-color: #4a4e69; }
+    .field {
+      background-color: #ede0d4;
+      color: #4a4e69;
+      border-radius: 10px;
+      padding: 20px;
+      position: absolute;
+      width: 35%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .form_label, p {
+      color: #4a4e69;
+      font-size: 22px;
+      padding: 10px;
+    }
+    .form_box:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 1000px #ede0d4 inset;
+    }
+    .form_box {
+      background-color: #ede0d4;
+      color: #4a4e69;
+      width: 250px;
+      border-radius: 10px;
+      border-color: #4a4e69;
+      border-width: 1px;
+      font-size: 15px;
+      padding: 8px;
+      margin: 10px
+    }
+    button {
+      font-size: 15px;
+      padding: 10px;
+      margin: 10px;
+      width: 100px;
+      background-color: #4a4e69;
+      color: #f2e9e4;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="field">
+    <form method="post" action="{% url 'fri_site:login' %}">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      {% for field in form %}
+        {{ field.errors }}
+        <label class="form_label" for="{{ field.id_for_label }}">{{ field.label }}:</label>
+        <input class="form_box" id="{{ field.id_for_label }}" name="{{ field.html_name }}"
+               type="{{ field.field.widget.input_type }}" maxlength="30" required /><br>
+      {% endfor %}<br>
+
+      <div style="text-align: center">
+        <button name="submit">Увійти</button>
+      </div>
+      <input type="hidden" name="next" value="{% url 'fri_site:index' %}" />
+    </form>
+  </div>
+</body>
+</html>
