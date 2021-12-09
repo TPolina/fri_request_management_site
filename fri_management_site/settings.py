@@ -26,15 +26,14 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET", None)
 assert SECRET_KEY is not None, "DJANGO_SECRET should be set as env variable"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# DEBUG = os.environ.get('DEBUG', None)
-# if DEBUG is None:
-#     DEBUG = False
-# else:
-#     if 'true' == DEBUG.lower():
-#         DEBUG = True
-#     else:
-#         DEBUG = False
+DEBUG = os.environ.get('DEBUG', None)
+if DEBUG is None:
+    DEBUG = False
+else:
+    if 'true' == DEBUG.lower():
+        DEBUG = True
+    else:
+        DEBUG = False
 
 # A list of host names that Django can serve: a security measure to prevent HTTP Host header attacks.
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
