@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
 from .models import User, Message
 from .forms import MessageForm
 from datetime import datetime
@@ -118,3 +120,16 @@ def edit_message(request, update_id):
 
     context = {'message': message, 'form': form}
     return render(request, 'fri_site/edit_message.html', context)
+
+
+def register(request):
+    if request.method != 'POST':
+        form = UserCreationForm()
+    else:
+        form = UserCreationForm(data=request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            login(request, new_user)
+            return redirect('fri_site:index')
+
+    return render(request, 'registration/register.html', {'form': form})
